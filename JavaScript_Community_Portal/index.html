@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Local Community Event Portal
+    </title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <a href="#home">Home</a>
+
+        <a href="#events">Events</a>
+
+        <a href="#feedback">Feedback</a>
+
+        <a href="#contact">Contact</a>
+
+        <a href="help.html"
+           target="_blank">
+
+            Help
+        </a>
+
+    </nav>
+
+    <!-- Header -->
+
+    <h1 id="mainHeader">
+
+        Cognizant Digital Nurture 5.0
+
+    </h1>
+
+    <!-- Welcome Banner -->
+
+    <section id="home">
+
+        <div id="welcomeBanner">
+
+            Welcome to Local Community Event Portal
+
+            <span style="color:red;
+                         font-weight:bold;">
+
+                Special Offer!
+
+            </span>
+
+        </div>
+
+    </section>
+
+    <!-- Events Gallery -->
+
+    <section id="events">
+
+        <h2>
+            Community Events Gallery
+        </h2>
+
+        <table>
+
+            <tr>
+
+                <td class="eventCard">
+
+                    <img src="event1.jpg"
+                         class="gallery">
+
+                    <p>Music Event</p>
+
+                </td>
+
+                <td class="eventCard">
+
+                    <img src="event2.jpg"
+                         class="gallery">
+
+                    <p>Food Festival</p>
+
+                </td>
+
+                <td class="eventCard">
+
+                    <img src="event3.jpg"
+                         class="gallery">
+
+                    <p>Sports Event</p>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="eventCard">
+
+                    <img src="event4.jpg"
+                         class="gallery">
+
+                    <p>Dance Event</p>
+
+                </td>
+
+                <td class="eventCard">
+
+                    <img src="event5.jpg"
+                         class="gallery">
+
+                    <p>Art Event</p>
+
+                </td>
+
+                <td class="eventCard">
+
+                    <img src="event6.jpg"
+                         class="gallery">
+
+                    <p>Tech Event</p>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+    <!-- Registration Form -->
+
+    <section>
+
+        <h2>
+            Event Registration
+        </h2>
+
+        <form id="registrationForm">
+
+            <input type="text"
+                   name="name"
+                   placeholder="Enter Name"
+                   required>
+
+            <br><br>
+
+            <input type="email"
+                   name="email"
+                   placeholder="Enter Email"
+                   required>
+
+            <br><br>
+
+            <input type="date">
+
+            <br><br>
+
+            <select id="eventType"
+                    onchange="showFee(this.value)">
+
+                <option value="">
+                    Select Event
+                </option>
+
+                <option value="100">
+                    Music Event
+                </option>
+
+                <option value="150">
+                    Dance Event
+                </option>
+
+                <option value="200">
+                    Sports Event
+                </option>
+
+                <option value="250">
+                    Art Event
+                </option>
+
+                <option value="300">
+                    Tech Event
+                </option>
+
+                <option value="350">
+                    Food Festival
+                </option>
+
+            </select>
+
+            <p id="fee"></p>
+
+            <textarea placeholder="Enter Message"
+                      onkeyup="countChars(this)">
+            </textarea>
+
+            <p id="charCount"></p>
+
+            <br><br>
+
+            <input type="tel"
+                   placeholder="Phone Number"
+                   onblur="validatePhone(this)">
+
+            <br><br>
+
+            <button type="submit">
+
+                Submit
+
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- Feedback -->
+
+    <section id="feedback">
+
+        <h2>
+            Event Feedback
+        </h2>
+
+        <textarea id="feedbackText"
+                  placeholder="Enter Feedback"
+                  onkeyup="countFeedbackChars(this)">
+        </textarea>
+
+        <p id="feedbackCount"></p>
+
+        <br><br>
+
+        <img src="event1.jpg"
+             width="250"
+             ondblclick="enlargeImage(this)">
+
+        <p>
+            Double click image to enlarge
+        </p>
+
+    </section>
+
+    <!-- Video -->
+
+    <section>
+
+        <h2>
+            Event Promo Video
+        </h2>
+
+        <video width="400"
+               controls>
+
+            <source src="event.mp4"
+                    type="video/mp4">
+
+        </video>
+
+    </section>
+
+    <!-- Geolocation -->
+
+    <section>
+
+        <button onclick="findLocation()">
+
+            Find Nearby Events
+
+        </button>
+
+        <p id="location"></p>
+
+    </section>
+
+    <!-- Dynamic Events -->
+
+    <section>
+
+        <h2>
+            Dynamic Events
+        </h2>
+
+        <select id="categoryFilter"
+                onchange="filterEventsByCategory()">
+
+            <option>
+                Music
+            </option>
+
+            <option>
+                Technology
+            </option>
+
+            <option>
+                Food
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <div id="eventsContainer"></div>
+
+        <br>
+
+        <button id="registerBtn"
+                onclick="submitRegistration()">
+
+            Submit Registration
+
+        </button>
+
+        <p id="loading"></p>
+
+    </section>
+
+    <!-- News -->
+
+    <section>
+
+        <h2>
+            Community News
+        </h2>
+
+        <div class="newsArticle">
+
+            The city council has introduced
+            new community programs.
+
+            Residents can participate in
+            music festivals, workshops,
+            sports events, and technology
+            seminars.
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer id="contact">
+
+        <h3>
+            Contact Us
+        </h3>
+
+        <p>
+            Email:
+            community@gmail.com
+        </p>
+
+    </footer>
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>
